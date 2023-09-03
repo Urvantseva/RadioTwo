@@ -4,37 +4,37 @@ import org.junit.jupiter.api.Test;
 public class RadioTest {
     @Test
     public void customizingTheCurrentStation() {                 //Пользовательская настройка текущей станции.
-        Radio radio = new Radio();
-        radio.setCurrentStation(5);
-        int expected = 5;
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(15);
+        int expected = 15;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void nextRadioStation() {                       //Переход на следующую радиостанцию.
-        Radio radio = new Radio();
-        radio.setCurrentStation(7);
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(17);
         radio.next();
-        int expected = 8;
+        int expected = 18;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void previousRadioStation() {                        //Переход на предыдущую радиостанцию.
-        Radio radio = new Radio();
-        radio.setCurrentStation(7);
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(17);
         radio.prev();
-        int expected = 6;
+        int expected = 16;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void jumpForwardTo0After9() {          //Переход вперед к 0 после 9.
-        Radio radio = new Radio();
-        radio.setCurrentStation(9);
+    public void jumpForwardTo0After9() {          //Переход вперед к 0 после 19.
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(19);
         radio.next();
         int expected = 0;
         int actual = radio.getCurrentStation();
@@ -43,11 +43,11 @@ public class RadioTest {
 
 
     @Test
-    public void GoBackTo9After0() {                //Вернуться к 9 после 0.
-        Radio radio = new Radio();
+    public void GoBackTo9After0() {                //Вернуться к 19 после 0.
+        Radio radio = new Radio(20);
         radio.setCurrentStation(0);
         radio.prev();
-        int expected = 9;
+        int expected = 19;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
@@ -55,8 +55,8 @@ public class RadioTest {
 
     @Test
     public void stationShouldNotBeMoreThan10() {            //Радиостанци не должна быть больше чем 10.
-        Radio radio = new Radio();
-        radio.setCurrentStation(11);
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(21);
         radio.next();
         int expected = 1;
         int actual = radio.getCurrentStation();
@@ -65,10 +65,10 @@ public class RadioTest {
 
     @Test
     public void stationMustNotBeBelow0() {               //Радиостанций не должна быть ниже 0.
-        Radio radio = new Radio();
+        Radio radio = new Radio(20);
         radio.setCurrentStation(-1);
         radio.prev();
-        int expected = 9;
+        int expected = 19;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
